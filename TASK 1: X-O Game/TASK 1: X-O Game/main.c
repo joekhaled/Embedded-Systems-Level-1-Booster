@@ -109,6 +109,8 @@ int game(char P1, char P2)
     
     while(1) //Infinite Loop that Stops When The Game Ends
     {
+        char Temp = '\0';
+        
         //Switch Player Turn
         if ((T == 'X') || (T == 'x'))
         {
@@ -119,18 +121,27 @@ int game(char P1, char P2)
             T = 'X';
         }
         
-        Check_Point_1 :
+        
         
         //Asks User For His Next Move Location as Rows and Columns
         printf("%c Player Turn : What is the location you want to use (as Row and Column)?\n", T);
         
+        Check_Point_1 :
+        
         printf("Row : "); scanf("%d", &ro);
         
-        //Check if User Enters Row Out of Boundaries if He did it will ask Him again for Correct Entry
-        
-        if (ro<1 || ro>3)
+        //Check if User Enters Letter Not A Number
+        Temp=getchar();
+        if(Temp!= '\n')
         {
-            system("clear");
+            printf("\nWorng Entry !\n\n");
+            goto Check_Point_1;
+        }
+        
+    
+        //Check if User Enters Row Out of Boundaries if He did it will ask Him again for Correct Entry
+        if (ro!=1 && ro!=2 && ro!=3)
+        {
             printf("\nWorng Entry !\n\n");
             goto Check_Point_1 ;
         }
@@ -139,10 +150,17 @@ int game(char P1, char P2)
         
         printf("Column : "); scanf("%d", &co);
         
-        //Check if User Enters Column Out of Boundaries if He did it will ask Him again for Correct Entry
-        if (co<1 || co>3)
+        //Check if User Enters Letter Not A Number
+        Temp=getchar();
+        if(Temp!= '\n')
         {
-            system("clear");
+            printf("\nWorng Entry !\n\n");
+            goto Check_Point_2;
+        }
+        
+        //Check if User Enters Column Out of Boundaries if He did it will ask Him again for Correct Entry
+        if (co!=1 && co!=2 && co!=3)
+        {
             printf("\nWorng Entry !\n\n");
             goto Check_Point_2 ;
         }
