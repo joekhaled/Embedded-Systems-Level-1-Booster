@@ -10,9 +10,7 @@ int  game(char, char);
 //Main Function
 int main()
 {
-    
    Tic_Tac_Toe(); //Calls The Game Function Once
-    
 }
 
 // Tic-Tac-Toe Game Main Function
