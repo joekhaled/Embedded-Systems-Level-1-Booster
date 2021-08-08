@@ -60,6 +60,7 @@ void Expression_Parentheses_Checker(void)
 uint8_t* Balanced_Parentheses(uint8_t* Exp)
 {
     uint8_t Character;
+    
     struct Stack Temp;
     Temp.Top = -1;
     
