@@ -25,6 +25,7 @@
 /* Begin PBXFileReference section */
 		D8F7E0FB26BB77940084B04D /* TASK 2: Implement your own Stack */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "TASK 2: Implement your own Stack"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8F7E0FE26BB77940084B04D /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		D8F7E10526BB78A50084B04D /* Types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Types.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				D8F7E0FE26BB77940084B04D /* main.c */,
+				D8F7E10526BB78A50084B04D /* Types.h */,
 			);
 			path = "TASK 2: Implement your own Stack";
 			sourceTree = "<group>";

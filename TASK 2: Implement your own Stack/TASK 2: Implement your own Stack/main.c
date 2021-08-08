@@ -18,10 +18,10 @@ uint8_t U[13] = {'N','o','t',' ','B','a','l','a','n','c','e','d','\0'};
 //Stack Implementation
 struct Stack
 {
-    uint8_t Expression[Max_Expression_Size];
+    uint8_t Elements[Max_Expression_Size];
     int32_t Top;
     
-} Stack;
+} Expression;
 
 //Main Function
 int main()
@@ -35,19 +35,22 @@ int main()
 
 void Expression_Parentheses_Checker(void)
 {
-    Stack.Top = -1;
+    Expression.Top = -1;
     uint8_t Temp;
     
     printf("Enter an Expression : ");
-    scanf("%c",&Temp);
+    
     do
     {
-        Push(Temp);
         scanf("%c",&Temp);
+        if(Temp != '\n')
+        {
+            Push(Temp);
+        }
     }while(Temp != '\n');
     
     
-    printf("%s",Balanced_Parentheses(Stack.Expression));
+    printf("%s",Balanced_Parentheses(Expression.Elements));
     printf("\n \n");
     
 //    Print_Stack();
@@ -56,36 +59,35 @@ void Expression_Parentheses_Checker(void)
 
 uint8_t* Balanced_Parentheses(uint8_t* Exp)
 {
+    uint8_t Character;
+    
     struct Stack Temp;
     Temp.Top = -1;
-    uint8_t Character;
-    int32_t Counter = 0;
     
     do
     {
-        Character = Pull();
-        
-        if(Character == '}' || Character == ')')
-        {
-            Temp.Top ++;
-            Temp.Expression[Temp.Top] = Character;
-        }
+        Character = *Exp;
         
         if(Character == '{' || Character == '(')
         {
-            if(Character == '{' && Temp.Expression[Temp.Top] == '}')
+            Temp.Top++;
+            Temp.Elements[Temp.Top] = Character;
+        }
+        else if(Character == '}' || Character == ')')
+        {
+            if(Character == '}' && Temp.Elements[Temp.Top] == '{')
             {
-                Temp.Expression[Temp.Top] = '\0';
-                Temp.Top --;
+                Temp.Elements[Temp.Top] = '\0';
+                Temp.Top--;
             }
-            else if(Character == '(' && Temp.Expression[Temp.Top] == ')')
+            else if(Character == ')' && Temp.Elements[Temp.Top] == '(')
             {
-                Temp.Expression[Temp.Top] = '\0';
-                Temp.Top --;
+                Temp.Elements[Temp.Top] = '\0';
+                Temp.Top--;
             }
         }
         
-        Counter++;
+        Exp++;
     }while(Character != '\0');
     
     
@@ -101,15 +103,15 @@ uint8_t* Balanced_Parentheses(uint8_t* Exp)
 
 void Push(uint8_t Character)
 {
-    if (Stack.Top == (Max_Expression_Size - 1))
+    if (Expression.Top == (Max_Expression_Size - 1))
     {
         printf ("Expression is Very Large\n");
         Expression_Parentheses_Checker();
     }
     else
     {
-        Stack.Top ++;
-        Stack.Expression[Stack.Top] = Character;
+        Expression.Top ++;
+        Expression.Elements[Expression.Top] = Character;
     }
 }
 
@@ -117,20 +119,24 @@ uint8_t Pull(void)
 {
     uint8_t Character;
     
-    if (Stack.Top != -1)
+    if (Expression.Top != -1)
     {
-        Character = Stack.Expression[Stack.Top];
-        Stack.Top = Stack.Top - 1;
+        Character = Expression.Elements[Expression.Top];
+        Expression.Top --;
         return Character;
     }
-    return '\0';
+    else
+    {
+        return '\0';
+    }
+    
 }
 
 void Print_Stack(void)
 {
     printf("\n");
     
-    while(Stack.Top != -1)
+    while(Expression.Top != -1)
     {
         printf("%c",Pull());
     }
