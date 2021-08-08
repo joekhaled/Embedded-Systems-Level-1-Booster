@@ -2,7 +2,7 @@
 #include <string.h> //Used For bzero Function
 #include "Types.h"
 
-#define Max_Array_Size 100
+#define Max_Array_Size 255
 
 //Functions Prototypes
 void Bubble_Sort(uint32_t*);
@@ -15,26 +15,26 @@ uint32_t Array_Length = 0;
 
 int main()
 {
-    while(1)
+    while(1) //Infinite Loop to Restart Program After Every Search
     {
-        bzero(Array,Max_Array_Size);
-        Required_Number = 0;
+        bzero(Array,Max_Array_Size); //Standard Function to Clear Elements Array Every Time
+        Required_Number = 0; //Variable to Store Required Number to Search
         Array_Length = 0;
         
-        printf("Enter Array Elemnts : ");
+        printf("Enter Array Elements : ");
         
         do
         {
-            scanf("%d",&Array[Array_Length]);
+            scanf("%d",&Array[Array_Length]); //Read & Stores Elemnt by Elemnt
             Array_Length++;
             
-        }while(getchar() != '\n');
+        }while(getchar() != '\n'); //Stop Loop When Reaches End
         
-        Bubble_Sort(Array);
+        Bubble_Sort(Array); //Function That Sort Given Array Elements Ascendingly
         
-        printf("Array Elemnts After Sorting : ");
+        printf("Array Elements After Sorting Ascendingly : ");
         
-        for(int C=0 ; C<Array_Length ;C++)
+        for(int C=0 ; C<Array_Length ;C++) //Loop To Print Array Elements
         {
             printf("%d ",Array[C]);
         }
@@ -44,13 +44,13 @@ int main()
         printf("Enter Number You Want to Find : ");
         scanf("%d",&Required_Number);
         
-        uint8_t Position = Binary_Search(Array,Array_Length,Required_Number);
+        uint8_t Position = Binary_Search(Array,Array_Length,Required_Number); //Send Data to Binary Search Function and Return Position
         
-        if(Position == 'X')
+        if(Position == 'X') //Binary Search Function Returns X Character if Number not Found in Array
         {
             printf("Number you Entered is Not Found \n\n");
         }
-        else
+        else //If Number Found -> Prints it's Index
         {
             printf("Location of Required Number : %d \n\n",Position+1);
         }
@@ -67,7 +67,7 @@ void Bubble_Sort(uint32_t* Array_Ptr)
              int X = Array[C2+1];
              int Y = Array[C2];
          
-             if(X<Y)
+             if(X<Y) //If Number is Less Than the Next Number Then Swap Them
              {
                  Array[C2+1] = Y;
                  Array[C2] = X;
