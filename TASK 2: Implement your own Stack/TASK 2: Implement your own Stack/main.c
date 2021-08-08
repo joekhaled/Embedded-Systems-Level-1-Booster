@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h> //Used For bzero Function
 #include "Types.h"
 
 #define Max_Expression_Size 50
@@ -11,9 +12,9 @@ void Print_Stack(void);
 uint8_t* Balanced_Parentheses(uint8_t*);
 void Expression_Parentheses_Checker(void);
 
-//Strings Saved As Array of Characters
-uint8_t B[9] = {'B','a','l','a','n','c','e','d','\0'};
-uint8_t U[13] = {'N','o','t',' ','B','a','l','a','n','c','e','d','\0'};
+//Strings
+uint8_t B[9] = {"Balanced"};
+uint8_t U[13] = {"Not Balanced"};
 
 //Stack Implementation
 struct Stack
@@ -26,72 +27,76 @@ struct Stack
 //Main Function
 int main()
 {
-    while(1)
+    while(1) //Infinite Loop to Restart Program After Every Expression Check
     {
         Expression_Parentheses_Checker();
     }
-    
 }
 
 void Expression_Parentheses_Checker(void)
 {
-    Expression.Top = -1;
-    uint8_t Temp;
+    bzero(Expression.Elements, Max_Expression_Size); //Standard Function to Clear Elements Array Every Time
+    Expression.Top = -1; //Initialization of Top with -1
+    uint8_t Temp; //Temporary Variable To Store Characters to While Scanning
     
     printf("Enter an Expression : ");
+    scanf("%c",&Temp); //Scan First Character
     
-    do
+    while(Temp != '\n') //Check if Character isn't Enter Character so it stop Iteration When it's End of Expression
     {
-        scanf("%c",&Temp);
-        if(Temp != '\n')
-        {
-            Push(Temp);
-        }
-    }while(Temp != '\n');
+        Push(Temp); //Push It Into Main Stack
+        scanf("%c",&Temp); //Scan Character By Character
+    }
     
-    
-    printf("%s",Balanced_Parentheses(Expression.Elements));
+    printf("%s",Balanced_Parentheses(Expression.Elements)); //Print The Result of Expression Parentheses Check
     printf("\n \n");
     
-//    Print_Stack();
+    //    Print_Stack(); //Function to Print Stack for Debugging
     
 }
 
 uint8_t* Balanced_Parentheses(uint8_t* Exp)
 {
-    uint8_t Character;
+    uint8_t Character; //Temporary Variable To Store Character
     
-    struct Stack Temp;
-    Temp.Top = -1;
+    struct Stack Temp; //Temporary Stack To Store Parentheses to Compare
+    Temp.Top = -1; //Initialization of Top with -1
     
-    do
+    if(Expression.Top > 0) //Check if Expression is longer than one Character
     {
-        Character = *Exp;
-        
-        if(Character == '{' || Character == '(')
+        do
         {
-            Temp.Top++;
-            Temp.Elements[Temp.Top] = Character;
-        }
-        else if(Character == '}' || Character == ')')
-        {
-            if(Character == '}' && Temp.Elements[Temp.Top] == '{')
+            Character = *Exp; //Temporary Variable stores Charcter of Array that Pointer Exp pointing on
+            
+            if(Character == '{' || Character == '(') //Check if Charcter is Opening Parenthes
             {
-                Temp.Elements[Temp.Top] = '\0';
-                Temp.Top--;
+                Temp.Top++; //Increment Top of Temp Stack
+                Temp.Elements[Temp.Top] = Character; //Add Charcter to Temp Stack
             }
-            else if(Character == ')' && Temp.Elements[Temp.Top] == '(')
+            else if(Character == '}' || Character == ')') //Check if Charcter is Closing Parenthes
             {
-                Temp.Elements[Temp.Top] = '\0';
-                Temp.Top--;
+                if(Character == '}' && Temp.Elements[Temp.Top] == '{') //Check if Last Charcter in Temp Stack is Closing Parenthes
+                {
+                    Temp.Elements[Temp.Top] = '\0'; //Remove Charcter to Temp Stack
+                    Temp.Top--; //Decrement Top of Temp Stack
+                }
+                else if(Character == ')' && Temp.Elements[Temp.Top] == '(') //Check if Last Charcter in Temp Stack is Closing Parenthes
+                {
+                    Temp.Elements[Temp.Top] = '\0'; //Remove Charcter to Temp Stack
+                    Temp.Top--; //Decrement Top of Temp Stack
+                }
             }
-        }
-        
-        Exp++;
-    }while(Character != '\0');
+            
+            Exp++; //Increment Pointer Postion to Next Charcter
+        }while(Character != '\0'); //Break Loop When it Reaches End of Expression
+    }
+    else
+    {
+        return U; //Case:If Expression is longer than one Character Return Not Balanced
+    }
     
     
-    if(Temp.Top == -1)
+    if(Temp.Top == -1) //If Temp Stack is Empty at the End of the Check Return Balanced
     {
         return B;
     }
@@ -103,15 +108,15 @@ uint8_t* Balanced_Parentheses(uint8_t* Exp)
 
 void Push(uint8_t Character)
 {
-    if (Expression.Top == (Max_Expression_Size - 1))
+    if (Expression.Top == (Max_Expression_Size - 1)) //Check to Handle Stack Overflow
     {
         printf ("Expression is Very Large\n");
-        Expression_Parentheses_Checker();
+        Expression_Parentheses_Checker(); //Restart Program
     }
     else
     {
-        Expression.Top ++;
-        Expression.Elements[Expression.Top] = Character;
+        Expression.Top ++; //Increment Top
+        Expression.Elements[Expression.Top] = Character; //Add Character to Stack
     }
 }
 
@@ -121,21 +126,21 @@ uint8_t Pull(void)
     
     if (Expression.Top != -1)
     {
-        Character = Expression.Elements[Expression.Top];
-        Expression.Top --;
+        Character = Expression.Elements[Expression.Top]; //Return Character From Stack
+        Expression.Elements[Expression.Top] = '\0'; //Extra Step to Clean Stack from Garbage Values
+        Expression.Top --; //Decrement Top
         return Character;
     }
     else
     {
-        return '\0';
+        return '\0'; //Handle Pulling From Empty Stack
     }
-    
 }
 
 void Print_Stack(void)
 {
     printf("\n");
-    
+
     while(Expression.Top != -1)
     {
         printf("%c",Pull());
