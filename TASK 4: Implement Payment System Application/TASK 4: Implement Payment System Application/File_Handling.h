@@ -7,7 +7,7 @@ void Import_Bank_Server_Data(ST_AccountBalance_t* Bank_Customers_Balance_Array)
 {
     FILE *File_Ptr;
     
-    File_Ptr = fopen("/Users/joe/Google Drive/Embedded Systems/Course/Tasks/Embedded-Systems-Level-1-Booster/TASK 4: Implement Payment System Application/TASK 4: Implement Payment System Application/Bank_Server_Data.txt","r");
+    File_Ptr = fopen("Bank_Server_Data.txt","r");
 
     for(int C=0 ; C<Number_of_Bank_Customers ; C++)
     {
@@ -22,7 +22,7 @@ void Export_Transactions_Data(ST_Transaction_t* New_Transaction , uint32_t Reaso
 {
     FILE *File_Ptr;
     
-    File_Ptr = fopen("/Users/joe/Google Drive/Embedded Systems/Course/Tasks/Embedded-Systems-Level-1-Booster/TASK 4: Implement Payment System Application/TASK 4: Implement Payment System Application/Transactions_Data.txt","a");
+    File_Ptr = fopen("Transactions_Data.txt","a");
 
     fprintf(File_Ptr,"Card Holder Data :- \n");
     fprintf(File_Ptr,"--------------------\n");
