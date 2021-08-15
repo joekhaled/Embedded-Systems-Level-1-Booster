@@ -13,20 +13,6 @@ Transaction State : APPROVED
 ---------------------------------------------------------------------------------------
 Card Holder Data :- 
 --------------------
-Card Holder Name : Ö" ÿ
-Card Holder PAN : ãìþ
-Card Expiry Date : 
-Terminal Data :- 
------------------
-Transaction Amount : 0.00
-Transaction Date : VÝ
-Transaction State :- 
----------------------
-Transaction State : DECLINED 
-Reason : Card Expired 
----------------------------------------------------------------------------------------
-Card Holder Data :- 
---------------------
 Card Holder Name : Yehia Mohammed
 Card Holder PAN : 456789123
 Card Expiry Date : 10/19
@@ -34,20 +20,6 @@ Terminal Data :-
 -----------------
 Transaction Amount : 20.50
 Transaction Date : 27/11/2019
-Transaction State :- 
----------------------
-Transaction State : DECLINED 
-Reason : Card Expired 
----------------------------------------------------------------------------------------
-Card Holder Data :- 
---------------------
-Card Holder Name : Ö" ÿ
-Card Holder PAN : –æþ
-Card Expiry Date : 
-Terminal Data :- 
------------------
-Transaction Amount : 0.00
-Transaction Date : VŸ·	
 Transaction State :- 
 ---------------------
 Transaction State : DECLINED 
