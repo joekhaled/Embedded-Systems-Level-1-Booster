@@ -3,14 +3,15 @@
 
 #define System_Freq                    16000000
 #define Timer_Resolution               8
-#define Clk_Prescaler                  1024
+#define Clk_Prescaler                  256
 
-#define Overflow_Time 0.016384 //(2^Timer_Resolution)*(Clk_Prescaler/System_Freq)
+#define Tick_Time 0.000016 // 1/System_Freq
+#define Overflow_Time 0.004096 //(2^Timer_Resolution)*(Clk_Prescaler/System_Freq)
 
 
 #define SIGNAL_MODE                    Normal_Mode
 #define COMPARE_OUTPUT_MODE            OC0_DISCONNECTED
-#define CLOCK_Prescaler                Clk_1024
+#define CLOCK_Prescaler                Clk_256
 
 /*
  
